@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <!-- 🔍 타이틀 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔍 음식 검색 및 추가"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:paddingBottom="12dp"
+        android:textColor="#333333"/>
+
+    <!-- 🍽 아침/점심/저녁 선택 -->
+    <RadioGroup
+        android:id="@+id/radioGroupMealType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="12dp">
+
+        <RadioButton
+            android:id="@+id/radioBreakfast"
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="🍞 아침" />
+
+        <RadioButton
+            android:id="@+id/radioLunch"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="🥗 점심" />
+
+        <RadioButton
+            android:id="@+id/radioDinner"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="🍛 저녁" />
+    </RadioGroup>
+
+    <!-- 검색창 -->
+    <EditText
+        android:id="@+id/editFoodName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="음식 이름 입력"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/btnSearchFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="검색"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="12dp"/>
+
+    <!-- 검색 결과 리스트 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:layout_marginTop="12dp">
+        <ListView
+            android:id="@+id/listViewFoodResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="8dp"/>
+    </ScrollView>
+
+    <!-- 영양 성분 + 저장 버튼 -->
+    <!-- 영양 성분 레이아웃 -->
+    <LinearLayout
+        android:id="@+id/layoutNutritionInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="칼로리 (kcal)"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:enabled="false"
+            android:hint="칼로리 값"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="단백질 (g)"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editProtein"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:enabled="false"
+            android:hint="단백질 값"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="탄수화물 (g)"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editCarbs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:enabled="false"
+            android:hint="탄수화물 값"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지방 (g)"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editFats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:enabled="false"
+            android:hint="지방 값"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSaveFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="저장하기"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"/>
+</LinearLayout>

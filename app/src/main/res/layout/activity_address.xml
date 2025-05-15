@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.androidtown.ppppp.location.address">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter address of your GYM"
+            android:textColor="@color/black"
+            android:textSize="20sp"></TextView>
+
+        <EditText
+            android:id="@+id/et_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Address of GYM"></EditText>
+
+        <!-- 현재 주소 표시 위치 -->
+        <TextView
+            android:id="@+id/locationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="위치를 가져오는 중..."
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLoadLocation"
+            android:text="현재 위치 불러오기"
+            android:layout_marginTop="12dp"
+            android:textColor="@android:color/white"
+            android:padding="12dp"/>
+
+
+        <!-- 이미지 미리보기 -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            android:scaleType="centerCrop"
+            android:background="@android:color/darker_gray" />
+
+        <!-- 주소 확인 버튼 -->
+        <Button
+            android:id="@+id/btnCheckMatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="입력 주소와 현재 위치 비교"
+            android:layout_marginTop="12dp"
+            android:textColor="@android:color/white"
+            android:padding="12dp" />
+
+        <!-- 비교 결과 표시 -->
+        <TextView
+            android:id="@+id/resultText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:background="@android:color/white"
+            android:elevation="2dp" />
+    </LinearLayout>
+</LinearLayout>

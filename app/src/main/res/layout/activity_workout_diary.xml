@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="16dp" android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💪 운동 일지"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#333"
+            android:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/btnSelectMedia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📸 사진/영상 업로드"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#6200EE"
+            android:textColor="#fff" />
+
+        <!-- ✅ 가로 콜라주: 사진을 좌우로 나열할 수 있는 컨테이너 -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/mediaContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical" />
+        </HorizontalScrollView>
+
+        <EditText
+            android:id="@+id/workoutMemo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="오늘 운동 내용을 자유롭게 작성해보세요!"
+            android:layout_marginTop="12dp"
+            android:background="#fff"
+            android:padding="12dp"
+            android:gravity="top"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/btnSaveWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="저장하기"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#03A9F4"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/btnDeleteWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🗑️ 운동 일지 삭제"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#F44336"
+            android:textColor="#fff" />
+
+    </LinearLayout>
+</ScrollView>

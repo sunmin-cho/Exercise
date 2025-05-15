@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="          💪 PT 가능한 시간을 선택하세요 🔥"
+            android:textSize="18sp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- ✅ When2meet 스타일 드래그 시간 선택 그리드 -->
+        <org.androidtown.ppppp.pt.TimeGridSelector
+            android:id="@+id/timeGrid"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:layout_marginBottom="5dp" />
+
+        <Button
+            android:id="@+id/btn_save_times"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⏰ 시간 저장하기 ⏰"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_show_common"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🏋️ 가능한 PT 시간 보기 🏋️"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_view_reservations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ 예약 내역 ✅"
+            android:layout_marginBottom="8dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

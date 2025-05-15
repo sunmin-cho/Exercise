@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1031883966568",
+    "firebase_url": "https://exercise-4df78-default-rtdb.firebaseio.com",
+    "project_id": "exercise-4df78",
+    "storage_bucket": "exercise-4df78.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031883966568:android:f4849f5411b7e21dd553dd",
+        "android_client_info": {
+          "package_name": "org.androidtown.ppppp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031883966568-tnnn4cib3ldgvng7clk89lcaap9cqufo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.androidtown.ppppp",
+            "certificate_hash": "f24b494d5982cfaaa3a65d5dfe265be6683cea93"
+          }
+        },
+        {
+          "client_id": "1031883966568-pr46mnb1tq6r66nbriafdbf9ckj9uhk3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB73iGYrrwXU1KeBxS5jkWZnACwP-moY7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031883966568-pr46mnb1tq6r66nbriafdbf9ckj9uhk3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

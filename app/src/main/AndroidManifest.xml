@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.androidtown.ppppp">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Ppppp"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".Homepage"/>
+        <activity android:name=".exercise.ExerciseList"/>
+        <activity android:name=".exercise.ExerciseDetail"/>
+        <activity android:name=".exercise.ExerciseAdd"/>
+        <activity android:name=".exercise.ExerciseSearch"/>
+        <activity android:name=".user.UserPage"/>
+        <activity android:name=".user.UserEdit"/>
+        <activity android:name=".chat.ChatList"/>
+        <activity android:name=".chat.ChatActivity"/>
+        <activity android:name=".JoinMembership"/>
+        <activity android:name=".exercise.FavoritesActivity"/>
+        <activity android:name=".exercise.RecommendedExercisesActivity"/>
+        <activity android:name="org.androidtown.ppppp.models.MainActivity2"/>
+        <activity android:name="org.androidtown.ppppp.models.WorkoutDiaryActivity"/>
+        <activity android:name="org.androidtown.ppppp.models.AddFoodActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+        <activity android:name="org.androidtown.ppppp.models.ChatbotActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+        <activity
+            android:name="org.androidtown.ppppp.pt.PtTimeMain"
+            android:exported="true"/>
+        <activity
+            android:name="org.androidtown.ppppp.inbody.InbodyAdapter"
+            android:exported="false" />
+        <activity
+            android:name="org.androidtown.ppppp.inbody.InbodyRecord"
+            android:exported="false" />
+        <activity
+            android:name="org.androidtown.ppppp.inbody.InbodyListActivity"
+            android:exported="false" />
+        <activity
+            android:name="org.androidtown.ppppp.inbody.loadInbodyInfo"
+            android:exported="false" />
+        <activity
+            android:name="org.androidtown.ppppp.location.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name="org.androidtown.ppppp.location.address"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.kakao.vectormap.KAKAO_MAP_KEY"
+            android:value="KAKAO_MAP_KEY" />
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="ocr" />
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- Android 13 이상용 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+
+</manifest>

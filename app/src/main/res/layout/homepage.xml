@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- 뒤로 가기 버튼을 포함한 Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,114 +15,129 @@
         app:navigationIcon="@drawable/ic_back"
         tools:ignore="MissingConstraints" />
 
+
     <Button
         android:id="@+id/btnlocation"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:text="위치비교"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintEnd_toStartOf="@id/btninbody"
+        app:layout_constraintHorizontalWeight="1"
+        app:layout_constraintHorizontal_chainStyle="spread" />
 
     <Button
         android:id="@+id/btninbody"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="인바디"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toEndOf="@id/btnlocation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnlocation" />
+        app:layout_constraintHorizontalWeight="1" />
+
 
     <Button
         android:id="@+id/btndoi"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="도이님 파트"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintTop_toBottomOf="@id/btnlocation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btninbody" />
+        app:layout_constraintEnd_toStartOf="@id/btnpt"
+        app:layout_constraintHorizontalWeight="1"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btnpt"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="PT 예약"
+        app:layout_constraintTop_toBottomOf="@id/btninbody"
+        app:layout_constraintStart_toEndOf="@id/btndoi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btndoi" />
+        app:layout_constraintHorizontalWeight="1"
+        android:layout_marginTop="16dp" />
+
 
     <Button
         android:id="@+id/btnsearch"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="운동 검색"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintTop_toBottomOf="@id/btndoi"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnpt"/>
+        app:layout_constraintEnd_toStartOf="@id/btnfavorite"
+        app:layout_constraintHorizontalWeight="1"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btnfavorite"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="즐겨찾기"
+        app:layout_constraintTop_toBottomOf="@id/btnpt"
+        app:layout_constraintStart_toEndOf="@id/btnsearch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnsearch"/>
+        app:layout_constraintHorizontalWeight="1"
+        android:layout_marginTop="16dp" />
+
 
     <Button
         android:id="@+id/btnrecommend"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="운동추천"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintTop_toBottomOf="@id/btnsearch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnfavorite"/>
+        app:layout_constraintEnd_toStartOf="@id/btnmy"
+        app:layout_constraintHorizontalWeight="1"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btnmy"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="유저페이지"
+        app:layout_constraintTop_toBottomOf="@id/btnfavorite"
+        app:layout_constraintStart_toEndOf="@id/btnrecommend"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnrecommend" />
+        app:layout_constraintHorizontalWeight="1"
+        android:layout_marginTop="16dp" />
+
 
     <Button
         android:id="@+id/btnchat"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="채팅"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintTop_toBottomOf="@id/btnrecommend"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnmy" />
+        app:layout_constraintEnd_toStartOf="@id/btnlogout"
+        app:layout_constraintHorizontalWeight="1"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btnlogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="LogOut"
+        app:layout_constraintTop_toBottomOf="@id/btnmy"
+        app:layout_constraintStart_toEndOf="@id/btnchat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontalWeight="1"
+        android:layout_marginTop="16dp" />
+
+
+    <Button
+        android:id="@+id/btnatt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="LogOut"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:text="Attendance"
+        app:layout_constraintTop_toBottomOf="@id/btnchat"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnchat" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

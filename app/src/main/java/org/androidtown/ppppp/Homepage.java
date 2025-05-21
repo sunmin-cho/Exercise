@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.androidtown.ppppp.attendance.AttendanceActivity;
 import org.androidtown.ppppp.chat.ChatList;
 import org.androidtown.ppppp.exercise.ExerciseSearch;
 import org.androidtown.ppppp.exercise.FavoritesActivity;
@@ -28,7 +29,7 @@ import org.androidtown.ppppp.user.UserPage;
 
 public class Homepage extends AppCompatActivity {
 
-    private Button btnLocation, btnInbody, btnDoi, btnPT, btnSearch, btnFavorite, btnRecommend, btnMy, btnChat, btnLogout;
+    private Button btnLocation, btnInbody, btnDoi, btnPT, btnSearch, btnFavorite, btnRecommend, btnMy, btnChat, btnLogout, btnAtt;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -46,6 +47,7 @@ public class Homepage extends AppCompatActivity {
         btnLocation = findViewById(R.id.btnlocation);
         btnInbody = findViewById(R.id.btninbody);
         btnLogout = findViewById(R.id.btnlogout);
+        btnAtt = findViewById(R.id.btnatt);
 
         SharedPreferences prefs = getSharedPreferences("userPrefs", MODE_PRIVATE);
 
@@ -119,6 +121,15 @@ public class Homepage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Homepage.this, ChatList.class);
+                startActivity(intent);
+            }
+        });
+
+        // Attendance 버튼 클릭 시 Attendance.java로 이동
+        btnAtt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Homepage.this, AttendanceActivity.class);
                 startActivity(intent);
             }
         });

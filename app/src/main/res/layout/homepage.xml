@@ -24,7 +24,6 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btninbody"
-        app:layout_constraintHorizontalWeight="1"
         app:layout_constraintHorizontal_chainStyle="spread" />
 
     <Button
@@ -34,8 +33,7 @@
         android:text="인바디"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toEndOf="@id/btnlocation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontalWeight="1" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <Button
@@ -46,7 +44,6 @@
         app:layout_constraintTop_toBottomOf="@id/btnlocation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnpt"
-        app:layout_constraintHorizontalWeight="1"
         android:layout_marginTop="16dp" />
 
     <Button
@@ -57,7 +54,6 @@
         app:layout_constraintTop_toBottomOf="@id/btninbody"
         app:layout_constraintStart_toEndOf="@id/btndoi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontalWeight="1"
         android:layout_marginTop="16dp" />
 
 
@@ -69,7 +65,6 @@
         app:layout_constraintTop_toBottomOf="@id/btndoi"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnfavorite"
-        app:layout_constraintHorizontalWeight="1"
         android:layout_marginTop="16dp" />
 
     <Button
@@ -80,7 +75,6 @@
         app:layout_constraintTop_toBottomOf="@id/btnpt"
         app:layout_constraintStart_toEndOf="@id/btnsearch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontalWeight="1"
         android:layout_marginTop="16dp" />
 
 
@@ -92,7 +86,6 @@
         app:layout_constraintTop_toBottomOf="@id/btnsearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnmy"
-        app:layout_constraintHorizontalWeight="1"
         android:layout_marginTop="16dp" />
 
     <Button
@@ -103,7 +96,6 @@
         app:layout_constraintTop_toBottomOf="@id/btnfavorite"
         app:layout_constraintStart_toEndOf="@id/btnrecommend"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontalWeight="1"
         android:layout_marginTop="16dp" />
 
 
@@ -115,26 +107,24 @@
         app:layout_constraintTop_toBottomOf="@id/btnrecommend"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnlogout"
-        app:layout_constraintHorizontalWeight="1"
         android:layout_marginTop="16dp" />
-
-    <Button
-        android:id="@+id/btnlogout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="LogOut"
-        app:layout_constraintTop_toBottomOf="@id/btnmy"
-        app:layout_constraintStart_toEndOf="@id/btnchat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontalWeight="1"
-        android:layout_marginTop="16dp" />
-
 
     <Button
         android:id="@+id/btnatt"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Attendance"
+        app:layout_constraintTop_toBottomOf="@id/btnmy"
+        app:layout_constraintStart_toEndOf="@id/btnchat"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+
+    <Button
+        android:id="@+id/btnlogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
         app:layout_constraintTop_toBottomOf="@id/btnchat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

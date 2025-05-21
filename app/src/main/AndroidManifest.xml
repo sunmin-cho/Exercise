@@ -46,6 +46,7 @@
         <activity android:name=".chat.ChatActivity"/>
         <activity android:name=".JoinMembership"/>
         <activity android:name=".exercise.FavoritesActivity"/>
+        <activity android:name=".attendance.AttendanceActivity"/>
         <activity android:name=".exercise.RecommendedExercisesActivity"/>
         <activity android:name="org.androidtown.ppppp.models.MainActivity2"/>
         <activity android:name="org.androidtown.ppppp.models.WorkoutDiaryActivity"/>

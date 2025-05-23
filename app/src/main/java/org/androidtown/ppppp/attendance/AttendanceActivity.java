@@ -1,10 +1,15 @@
 package org.androidtown.ppppp.attendance;
 
 import org.androidtown.ppppp.R;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,40 +25,30 @@ import java.util.*;
 public class AttendanceActivity extends AppCompatActivity {
 
     private TextView tvTodayDate, tvStatus;
-    private Button btnCheckIn;
+    private Button btnCheckIn, btnSetAlarm;
     private RecyclerView recyclerAttendanceHistory;
-
     private FirebaseFirestore db;
-
     private AttendanceAdapter adapter;
     private List<String> attendanceList = new ArrayList<>();
-
-    private String todayDate;
-    private String uid;  // 🔹 SharedPreferences로부터 불러올 사용자 ID
+    private String todayDate, uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance);
 
-        // 🔹 SharedPreferences에서 uid 가져오기
         SharedPreferences prefs = getSharedPreferences("userPrefs", MODE_PRIVATE);
         uid = prefs.getString("uid", null);
-
         if (uid == null) {
             Toast.makeText(this, "사용자 정보가 없습니다. 다시 로그인해주세요.", Toast.LENGTH_LONG).show();
-            finish(); // 액티비티 종료
+            finish();
             return;
         }
-
-        TextView tvTodayDate = findViewById(R.id.tvTodayDate);
-
-        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        tvTodayDate.setText("오늘 날짜: " + today);
 
         tvTodayDate = findViewById(R.id.tvTodayDate);
         tvStatus = findViewById(R.id.tvAttendanceStatus);
         btnCheckIn = findViewById(R.id.btnCheckIn);
+        btnSetAlarm = findViewById(R.id.btnSetAlarm);
         recyclerAttendanceHistory = findViewById(R.id.recyclerAttendanceHistory);
 
         db = FirebaseFirestore.getInstance();
@@ -65,12 +60,66 @@ public class AttendanceActivity extends AppCompatActivity {
         adapter = new AttendanceAdapter(attendanceList);
         recyclerAttendanceHistory.setAdapter(adapter);
 
-        checkAlreadyCheckedIn(); // 이미 출석했는지 확인
-        loadAttendanceHistory(); // 출석 기록 불러오기
+        checkAlreadyCheckedIn();
+        loadAttendanceHistory();
 
         btnCheckIn.setOnClickListener(v -> markAttendance());
+        btnSetAlarm.setOnClickListener(v -> showTimePickerAndSetAlarm());
+
+        restoreAlarmIfExists();
+    }
+    private void showTimePickerAndSetAlarm() {
+        Calendar now = Calendar.getInstance();
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                this,
+                (TimePicker view, int hourOfDay, int minute) -> {
+                    saveAlarmTime(hourOfDay, minute);
+                    scheduleAlarm(hourOfDay, minute);
+                },
+                now.get(Calendar.HOUR_OF_DAY),
+                now.get(Calendar.MINUTE),
+                true
+        );
+        timePickerDialog.setTitle("알람 받을 시간을 선택하세요");
+        timePickerDialog.show();
     }
 
+    private void saveAlarmTime(int hour, int minute) {
+        SharedPreferences prefs = getSharedPreferences("alarmPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("alarm_hour", hour);
+        editor.putInt("alarm_minute", minute);
+        editor.apply();
+    }
+
+    private void scheduleAlarm(int hour, int minute) {
+        Intent intent = new Intent(this, AttendanceReminderReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+
+        if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        Toast.makeText(this, String.format("출석 알림이 %02d:%02d에 설정되었습니다.", hour, minute), Toast.LENGTH_SHORT).show();
+    }
+
+    private void restoreAlarmIfExists() {
+        SharedPreferences prefs = getSharedPreferences("alarmPrefs", MODE_PRIVATE);
+        int hour = prefs.getInt("alarm_hour", -1);
+        int minute = prefs.getInt("alarm_minute", -1);
+        if (hour != -1 && minute != -1) {
+            scheduleAlarm(hour, minute);
+        }
+    }
     private void checkAlreadyCheckedIn() {
         db.collection("attendance")
                 .document(uid)

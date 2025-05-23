@@ -20,17 +20,32 @@
         android:layout_marginTop="24dp" />
 
     <!-- 출석하기 버튼 -->
+
+    <!-- 출석 결과 메시지 -->
+
     <Button
         android:id="@+id/btnCheckIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="출석하기"
-        app:layout_constraintTop_toBottomOf="@id/tvTodayDate"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTodayDate" />
 
-    <!-- 출석 결과 메시지 -->
+    <Button
+        android:id="@+id/btnSetAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="출석 알람 설정"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintStart_toEndOf="@id/btnCheckIn"
+        app:layout_constraintTop_toBottomOf="@id/tvTodayDate" />
+
     <TextView
         android:id="@+id/tvAttendanceStatus"
         android:layout_width="wrap_content"

@@ -345,6 +345,8 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.androidtown.ppppp.BuildConfig;
 
 import org.androidtown.ppppp.R;
@@ -357,6 +359,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -577,9 +581,47 @@ public class address extends AppCompatActivity {
 
         double distance = EARTH_RADIUS * c * 1000; // 거리 (단위: km)
         if (distance < 100)
-            resultText.setText("기준위치와 100m 이내에 위치해 있습니다.");
+            resultText.setText("기준위치와 100m 이내에 위치해 있습니다. 출석 인정이 됩니다.");
         else
-            resultText.setText("기준위치와 100m 이상 떨어져 있습니다.");
+            resultText.setText("기준위치와 100m 이상 떨어져 있습니다. 출석 인정이 되지 않습니다.");
         resultText.setVisibility(View.VISIBLE);
+    }
+
+    private void checkAndMarkAttendance() {
+        String todayDate = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(new java.util.Date());
+        String uid = getSharedPreferences("userPrefs", MODE_PRIVATE).getString("uid", null);
+
+        if (uid == null) {
+            Toast.makeText(this, "사용자 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("attendance")
+                .document(uid)
+                .collection("records")
+                .document(todayDate)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Toast.makeText(this, "이미 출석 완료한 상태입니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("timestamp", com.google.firebase.Timestamp.now());
+
+                        db.collection("attendance")
+                                .document(uid)
+                                .collection("records")
+                                .document(todayDate)
+                                .set(data)
+                                .addOnSuccessListener(unused ->
+                                        Toast.makeText(this, "🎉 출석이 기록되었습니다!", Toast.LENGTH_SHORT).show()
+                                )
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(this, "출석 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                                );
+                    }
+                });
     }
 }

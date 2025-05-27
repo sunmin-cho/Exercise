@@ -3,34 +3,39 @@ package org.androidtown.ppppp.attendance;
 import org.androidtown.ppppp.R;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import android.widget.NumberPicker;
+
 public class AttendanceActivity extends AppCompatActivity {
 
     private TextView tvTodayDate, tvStatus;
-    private Button btnCheckIn, btnSetAlarm;
+    private Button  btnSetAlarm, btnSetGoal;
     private RecyclerView recyclerAttendanceHistory;
     private FirebaseFirestore db;
     private AttendanceAdapter adapter;
     private List<String> attendanceList = new ArrayList<>();
     private String todayDate, uid;
+    private int weeklyGoal = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +50,12 @@ public class AttendanceActivity extends AppCompatActivity {
             return;
         }
 
+        weeklyGoal = prefs.getInt("weekly_goal", 3);
+
         tvTodayDate = findViewById(R.id.tvTodayDate);
         tvStatus = findViewById(R.id.tvAttendanceStatus);
-        btnCheckIn = findViewById(R.id.btnCheckIn);
         btnSetAlarm = findViewById(R.id.btnSetAlarm);
+        btnSetGoal = findViewById(R.id.btnSetGoal);
         recyclerAttendanceHistory = findViewById(R.id.recyclerAttendanceHistory);
 
         db = FirebaseFirestore.getInstance();
@@ -60,28 +67,53 @@ public class AttendanceActivity extends AppCompatActivity {
         adapter = new AttendanceAdapter(attendanceList);
         recyclerAttendanceHistory.setAdapter(adapter);
 
-        checkAlreadyCheckedIn();
         loadAttendanceHistory();
-
-        btnCheckIn.setOnClickListener(v -> markAttendance());
-        btnSetAlarm.setOnClickListener(v -> showTimePickerAndSetAlarm());
+        btnSetAlarm.setOnClickListener(v -> showMaterialTimePickerAndSetAlarm());
+        btnSetGoal.setOnClickListener(v -> showGoalSettingDialog());
 
         restoreAlarmIfExists();
     }
-    private void showTimePickerAndSetAlarm() {
-        Calendar now = Calendar.getInstance();
-        TimePickerDialog timePickerDialog = new TimePickerDialog(
-                this,
-                (TimePicker view, int hourOfDay, int minute) -> {
-                    saveAlarmTime(hourOfDay, minute);
-                    scheduleAlarm(hourOfDay, minute);
-                },
-                now.get(Calendar.HOUR_OF_DAY),
-                now.get(Calendar.MINUTE),
-                true
-        );
-        timePickerDialog.setTitle("알람 받을 시간을 선택하세요");
-        timePickerDialog.show();
+
+    private void showMaterialTimePickerAndSetAlarm() {
+        MaterialTimePicker picker = new MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setHour(9)
+                .setMinute(0)
+                .setTitleText("출석 알림 시간 설정")
+                .build();
+
+        picker.show(getSupportFragmentManager(), "attendance_time_picker");
+
+        picker.addOnPositiveButtonClickListener(view -> {
+            int hour = picker.getHour();
+            int minute = picker.getMinute();
+            saveAlarmTime(hour, minute);
+            scheduleAlarm(hour, minute);
+            Toast.makeText(this, String.format("알람이 %02d:%02d로 설정됨", hour, minute), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void showGoalSettingDialog() {
+        final NumberPicker numberPicker = new NumberPicker(this);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(7);
+        numberPicker.setValue(weeklyGoal);
+
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("주간 출석 목표")
+                .setMessage("목표 출석 횟수를 설정하세요 (1~7)")
+                .setView(numberPicker)
+                .setPositiveButton("저장", (dialog, which) -> {
+                    int selectedGoal = numberPicker.getValue();
+                    SharedPreferences prefs = getSharedPreferences("userPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("weekly_goal", selectedGoal);  // 🔄 저장
+                    editor.apply();
+                    weeklyGoal = selectedGoal;
+                    Toast.makeText(this, "목표가 " + selectedGoal + "회로 설정되었습니다.", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("취소", null)
+                .show();
     }
 
     private void saveAlarmTime(int hour, int minute) {
@@ -108,8 +140,7 @@ public class AttendanceActivity extends AppCompatActivity {
         }
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
-        Toast.makeText(this, String.format("출석 알림이 %02d:%02d에 설정되었습니다.", hour, minute), Toast.LENGTH_SHORT).show();
+        Log.d("AlarmDebug", "Alarm set for: " + hour + ":" + minute);
     }
 
     private void restoreAlarmIfExists() {
@@ -120,50 +151,35 @@ public class AttendanceActivity extends AppCompatActivity {
             scheduleAlarm(hour, minute);
         }
     }
-    private void checkAlreadyCheckedIn() {
-        db.collection("attendance")
-                .document(uid)
-                .collection("records")
-                .document(todayDate)
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        tvStatus.setText("이미 출석 완료되었습니다.");
-                        btnCheckIn.setEnabled(false);
-                    }
-                });
-    }
 
-    private void markAttendance() {
-        Map<String, Object> data = new HashMap<>();
-        data.put("timestamp", Timestamp.now());
 
-        db.collection("attendance")
-                .document(uid)
-                .collection("records")
-                .document(todayDate)
-                .set(data)
-                .addOnSuccessListener(unused -> {
-                    tvStatus.setText("출석 완료되었습니다!");
-                    btnCheckIn.setEnabled(false);
-                    attendanceList.add(0, todayDate); // 최신 출석일을 맨 위로
-                    adapter.notifyItemInserted(0);
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(this, "출석 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-    }
 
     private void loadAttendanceHistory() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        Date weekStart = calendar.getTime();
+
+        calendar.add(Calendar.DAY_OF_WEEK, 6);
+        Date weekEnd = calendar.getTime();
+
         db.collection("attendance")
                 .document(uid)
                 .collection("records")
+                .whereGreaterThanOrEqualTo("timestamp", weekStart)
+                .whereLessThanOrEqualTo("timestamp", weekEnd)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    attendanceList.clear();
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        attendanceList.add(doc.getId()); // 날짜가 문서 ID
+                        attendanceList.add(doc.getId());
                     }
                     adapter.notifyDataSetChanged();
+
+                    if (attendanceList.size() < weeklyGoal) {
+                        Log.d("AttendanceGoal", "이번 주 출석 횟수: " + attendanceList.size() + " / 목표: " + weeklyGoal);
+                        Toast.makeText(this, "이번 주 출석 횟수가 목표보다 적습니다. 화이팅!", Toast.LENGTH_LONG).show();
+                    }
                 });
     }
 }

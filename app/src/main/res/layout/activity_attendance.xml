@@ -19,31 +19,26 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp" />
 
-    <!-- 출석하기 버튼 -->
-
-    <!-- 출석 결과 메시지 -->
-
-    <Button
-        android:id="@+id/btnCheckIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="출석하기"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTodayDate" />
 
     <Button
         android:id="@+id/btnSetAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="216dp"
         android:text="출석 알람 설정"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toEndOf="@id/btnCheckIn"
+        app:layout_constraintTop_toBottomOf="@id/tvTodayDate" />
+
+    <Button
+        android:id="@+id/btnSetGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="주간 목표 설정"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toEndOf="@id/btnSetAlarm"
         app:layout_constraintTop_toBottomOf="@id/tvTodayDate" />
 
     <TextView
@@ -52,7 +47,7 @@
         android:layout_height="wrap_content"
         android:text="출석 상태가 여기에 표시됩니다."
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/btnCheckIn"
+        app:layout_constraintTop_toBottomOf="@id/btnSetAlarm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />

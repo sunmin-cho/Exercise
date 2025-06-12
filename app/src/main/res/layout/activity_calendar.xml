@@ -1,93 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F5F5F5">
+    android:background="#F5F5F5"
+    tools:context=".models.MainActivity2">
 
-    <!-- 제목 -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="📝 건강 관리 📝"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:paddingBottom="12dp"
-        android:textColor="#333333" />
-
-    <!-- 달력 -->
-    <CalendarView
-        android:id="@+id/calendarView"
+    <!-- Toolbar → 맨 위에 딱 붙음 -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:title="🏋️ GymDiary"
+        android:titleTextColor="#000000"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_back" />
 
-    <!-- 식단 추가 버튼 -->
-    <Button
-        android:id="@+id/btnAddFood"
+    <!-- 본문 내용 → padding 따로 적용 -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="🍞 식단 추가하기 🍞"
-        android:backgroundTint="#6200EE"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="12dp" />
+        android:layout_height="match_parent">
 
-    <!-- 운동 일기 쓰기 버튼 -->
-    <Button
-        android:id="@+id/btnWorkoutDiary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="💪 운동 일기쓰기"
-        android:backgroundTint="#03A9F4"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="12dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnChatbot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="#FFFFFF"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:padding="4dp"
-        android:text="🤖챗봇🤖"
-        android:textColor="#000000"
-        android:textSize="16sp" />
+            <!-- 제목 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📝 건강 관리 📝"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:paddingBottom="12dp"
+                android:textColor="#333333" />
 
-    <!-- 식단 리스트 -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="236dp"
-        android:background="@android:color/white"
-        android:padding="8dp" />
+            <!-- 달력 -->
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"/>
 
-    <!-- 식단 없을 때 안내 텍스트 -->
-    <TextView
-        android:id="@+id/emptyTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="저장된 식단이 없습니다."
-        android:textSize="16sp"
-        android:textColor="#888888"
-        android:gravity="center"
-        android:visibility="gone" />
+            <!-- 식단 추가 버튼 -->
+            <Button
+                android:id="@+id/btnAddFood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🍞 식단 추가하기 🍞"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="15sp"
+                android:backgroundTint="@color/mint"
+                android:textColor="@color/textGray"
+                android:layout_marginBottom="12dp" />
 
-    <!-- 나의 운동 일지 보기 텍스트 -->
-    <TextView
-        android:id="@+id/tvWorkoutEntry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="📘 나의 운동 일지 보기"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#2196F3"
-        android:gravity="center"
-        android:paddingTop="24dp"
-        android:visibility="gone"
-        android:clickable="true"
-        android:focusable="true" />
+            <!-- 운동 일기 쓰기 버튼 -->
+            <Button
+                android:id="@+id/btnWorkoutDiary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💪 운동 일기쓰기"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="15sp"
+                android:backgroundTint="@color/mint"
+                android:textColor="@color/textGray"
+                android:layout_marginBottom="12dp" />
+
+            <!-- 식단 리스트 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="236dp"
+                android:background="@android:color/white"
+                android:padding="8dp" />
+
+            <!-- 식단 없을 때 안내 텍스트 -->
+            <TextView
+                android:id="@+id/emptyTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="저장된 식단이 없습니다."
+                android:textSize="16sp"
+                android:textColor="#888888"
+                android:gravity="center"
+                android:visibility="gone" />
+
+            <!-- 나의 운동 일지 보기 텍스트 -->
+            <TextView
+                android:id="@+id/tvWorkoutEntry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📘 나의 운동 일지 보기"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#2196F3"
+                android:gravity="center"
+                android:paddingTop="24dp"
+                android:visibility="gone"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

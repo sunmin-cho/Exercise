@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,6 +73,20 @@ public class AttendanceActivity extends AppCompatActivity {
         btnSetGoal.setOnClickListener(v -> showGoalSettingDialog());
 
         restoreAlarmIfExists();
+
+        // Toolbar 설정
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // 뒤로 가기 버튼 활성화
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // 현재 액티비티 종료 (뒤로 가기)
+        return true;
     }
 
     private void showMaterialTimePickerAndSetAlarm() {
@@ -176,10 +191,6 @@ public class AttendanceActivity extends AppCompatActivity {
                     }
                     adapter.notifyDataSetChanged();
 
-                    if (attendanceList.size() < weeklyGoal) {
-                        Log.d("AttendanceGoal", "이번 주 출석 횟수: " + attendanceList.size() + " / 목표: " + weeklyGoal);
-                        Toast.makeText(this, "이번 주 출석 횟수가 목표보다 적습니다. 화이팅!", Toast.LENGTH_LONG).show();
-                    }
                 });
     }
 }

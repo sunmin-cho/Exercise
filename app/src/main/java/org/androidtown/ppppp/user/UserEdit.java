@@ -168,9 +168,12 @@ public class UserEdit extends AppCompatActivity {
     }
 
     private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
         startActivityForResult(intent, 1000);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

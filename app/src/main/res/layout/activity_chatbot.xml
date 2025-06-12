@@ -1,44 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA">
+    android:background="#FAFAFA"
+    tools:context=".models.ChatbotActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🤖 운동 챗봇 상담 🤖"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:paddingBottom="8dp" />
-
-    <!-- ✅ RecyclerView로 교체 -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <!-- Toolbar → padding 없이 최상단 고정 -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="4dp"
-        android:clipToPadding="false"
-        android:scrollbars="vertical" />
-
-    <EditText
-        android:id="@+id/inputMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="질문을 입력하세요"
+        android:layout_height="?attr/actionBarSize"
+        android:title="🤖 운동 챗봇 🤖"
         android:background="#FFFFFF"
-        android:padding="12dp" />
+        android:titleTextColor="#000000"
+        app:navigationIcon="@drawable/ic_back"
+        android:elevation="4dp" />
 
-    <Button
-        android:id="@+id/btnSend"
+    <!-- 본문 내용 → padding 따로 적용 -->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="보내기"
-        android:backgroundTint="#4CAF50"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="8dp" />
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:layout_weight="1">
+
+        <!-- 제목 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🤖 운동 챗봇 상담 🤖"
+            android:fontFamily="@font/pretendard_black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:paddingBottom="8dp" />
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+        <!-- EditText -->
+        <EditText
+            android:id="@+id/inputMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="질문을 입력하세요"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="15sp"
+            android:background="#FFFFFF"
+            android:padding="12dp" />
+
+        <!-- 보내기 버튼 -->
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="보내기"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="15sp"
+            android:backgroundTint="@color/mint"
+            android:textColor="@color/textGray"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -23,13 +23,14 @@ import org.androidtown.ppppp.exercise.FavoritesActivity;
 import org.androidtown.ppppp.exercise.RecommendedExercisesActivity;
 import org.androidtown.ppppp.inbody.loadInbodyInfo;
 import org.androidtown.ppppp.location.address;
+import org.androidtown.ppppp.models.ChatbotActivity;
 import org.androidtown.ppppp.models.MainActivity2;
 import org.androidtown.ppppp.pt.PtTimeMain;
 import org.androidtown.ppppp.user.UserPage;
 
 public class Homepage extends AppCompatActivity {
 
-    private Button btnLocation, btnInbody, btnDoi, btnPT, btnSearch, btnFavorite, btnRecommend, btnMy, btnChat, btnLogout, btnAtt;
+    private Button btnLocation, btnInbody, btnDoi, btnPT, btnSearch, btnFavorite, btnRecommend, btnMy, btnChat, btnLogout, btnAtt, btnChatbot;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -48,6 +49,7 @@ public class Homepage extends AppCompatActivity {
         btnInbody = findViewById(R.id.btninbody);
         btnLogout = findViewById(R.id.btnlogout);
         btnAtt = findViewById(R.id.btnatt);
+        btnChatbot = findViewById(R.id.btnChatbot);
 
         SharedPreferences prefs = getSharedPreferences("userPrefs", MODE_PRIVATE);
 
@@ -132,6 +134,11 @@ public class Homepage extends AppCompatActivity {
                 Intent intent = new Intent(Homepage.this, AttendanceActivity.class);
                 startActivity(intent);
             }
+        });
+
+        btnChatbot.setOnClickListener(v -> {
+            Intent intent = new Intent(Homepage.this, ChatbotActivity.class);
+            startActivity(intent);
         });
 
         // Google 로그아웃 클라이언트 초기화

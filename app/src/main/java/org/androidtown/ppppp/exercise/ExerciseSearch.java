@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.*;
 
 import org.androidtown.ppppp.R;
@@ -39,7 +38,7 @@ public class ExerciseSearch extends AppCompatActivity {
 
         if (uid == null) {
             Toast.makeText(this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
-            finish(); // 또는 로그인 화면으로 전환
+            finish();
             return;
         }
 
@@ -63,6 +62,21 @@ public class ExerciseSearch extends AppCompatActivity {
                 return true;
             }
             return false;
+        });
+
+        Button btnSearchExercise = findViewById(R.id.btnSearchExercise);
+        btnSearchExercise.setOnClickListener(v -> {
+            String query = searchBar.getText().toString().trim();
+
+            if (!query.isEmpty()) {
+                saveSearchHistory(query);
+
+                Intent intent = new Intent(getApplicationContext(), ExerciseList.class);
+                intent.putExtra("search_query", query);
+                startActivity(intent);
+            } else {
+                Toast.makeText(ExerciseSearch.this, "검색어를 입력하세요.", Toast.LENGTH_SHORT).show();
+            }
         });
 
         Button btnAddExercise = findViewById(R.id.btnGoToAddExercise);

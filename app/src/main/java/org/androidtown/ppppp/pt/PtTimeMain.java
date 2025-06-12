@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
 
 import org.androidtown.ppppp.R;
 
@@ -120,8 +121,20 @@ public class PtTimeMain extends AppCompatActivity {
                 });
             });
         });
-    }
+        // Toolbar 설정
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        // 뒤로 가기 버튼 활성화
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // 현재 액티비티 종료 (뒤로 가기)
+        return true;
+    }
     private void createTrainerAvailableTimes() {
         trainerAvailableTimes.put("Monday", Arrays.asList(10, 11, 14, 15, 16, 18, 19, 20, 21));
         trainerAvailableTimes.put("Tuesday", Arrays.asList(11, 12, 13, 14, 15, 16, 17, 20, 21, 22));

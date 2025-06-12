@@ -5,25 +5,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".exercise.ExerciseList">
+    tools:context=".exercise.ExerciseList"
+    android:background="#F5F5F5">
 
-    <!-- AppBarLayout을 사용하여 Toolbar를 고정 -->
+    <!-- Toolbar 포함 AppBarLayout -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Light"> <!-- 밝은 테마로 변경 -->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="#FFFFFF"
             android:title="운동 추천 목록"
-            android:titleTextColor="@android:color/white"
-            app:navigationIcon="@drawable/ic_back"/>
+            app:title="🏋️ GymDiary"
+            android:titleTextColor="#000000"
+            app:navigationIcon="@drawable/ic_back" /> <!-- 검정 아이콘 사용 -->
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- 메인 콘텐츠 영역 -->
+    <!-- 메인 콘텐츠 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,7 +34,7 @@
         android:fitsSystemWindows="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- 검색 결과 제목 -->
+        <!-- 검색 결과 텍스트 -->
         <TextView
             android:id="@+id/result_text"
             android:layout_width="match_parent"
@@ -42,16 +44,16 @@
             android:textStyle="bold"
             android:padding="12dp"
             android:gravity="center"
-            android:textColor="@android:color/black"/>
+            android:textColor="#000000" />
 
         <!-- 구분선 -->
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@android:color/darker_gray"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp" />
 
-        <!-- 추천 운동 리스트 제목 -->
+        <!-- 추천 운동 제목 -->
         <TextView
             android:id="@+id/recommendation_title"
             android:layout_width="match_parent"
@@ -60,14 +62,14 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="8dp"
-            android:textColor="@android:color/black"
-            android:gravity="center"/>
+            android:textColor="#000000"
+            android:gravity="center" />
 
-        <!-- 추천 운동 리스트 -->
+        <!-- 운동 추천 리스트 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recommendation_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

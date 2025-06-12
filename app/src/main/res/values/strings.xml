@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EXERCISE</string>
+    <string name="app_name">🏋️ GymDiary</string>
     <string name="default_web_client_id">12345-abcde12345.apps.googleusercontent.com</string>
     <string-array name="gender_options">
         <item>남자</item>

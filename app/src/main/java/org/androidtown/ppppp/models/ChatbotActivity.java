@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,8 +58,21 @@ public class ChatbotActivity extends AppCompatActivity {
                 sendToGemini(userMessage);
             }
         });
-    }
 
+        // Toolbar 설정
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // 뒤로 가기 버튼 활성화
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // 현재 액티비티 종료 (뒤로 가기)
+        return true;
+    }
     private void sendToGemini(String userInput) {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)

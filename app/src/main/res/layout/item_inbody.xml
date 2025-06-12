@@ -1,44 +1,53 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="12dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal">
 
+    <!-- 텍스트들 아래쪽에 배치됨 -->
     <TextView
         android:id="@+id/txtDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
 
     <TextView
         android:id="@+id/txtWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"/>
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtMuscleMass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"/>
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtBodyFatMass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"/>
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtBodyFatPercent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"/>
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtBmi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"/>
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
 </LinearLayout>

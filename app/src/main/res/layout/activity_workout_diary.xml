@@ -3,10 +3,12 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:padding="16dp" android:background="#F5F5F5">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -17,16 +19,17 @@
             android:textColor="#333"
             android:layout_gravity="center" />
 
+        <!-- ✅ 가로 콜라주: 사진을 좌우로 나열할 수 있는 컨테이너 -->
         <Button
             android:id="@+id/btnSelectMedia"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📸 사진/영상 업로드"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:backgroundTint="#6200EE"
-            android:textColor="#fff" />
+            android:backgroundTint="@color/myButtonColor"
+            android:text="📸 사진/영상 업로드"
+            android:textColor="#000000" />
 
-        <!-- ✅ 가로 콜라주: 사진을 좌우로 나열할 수 있는 컨테이너 -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,34 +45,46 @@
                 android:gravity="center_vertical" />
         </HorizontalScrollView>
 
-        <EditText
-            android:id="@+id/workoutMemo"
+        <androidx.cardview.widget.CardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:hint="오늘 운동 내용을 자유롭게 작성해보세요!"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:background="#fff"
-            android:padding="12dp"
-            android:gravity="top"
-            android:inputType="textMultiLine" />
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <EditText
+                android:id="@+id/workoutMemo"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:hint="오늘 운동 내용을 자유롭게 작성해보세요!"
+                android:padding="12dp"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:background="@android:color/transparent"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/btnSaveWorkout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장하기"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:backgroundTint="#03A9F4"
-            android:textColor="#fff" />
+            android:backgroundTint="@color/myButtonColor"
+            android:text="저장하기"
+            android:textColor="#000000" />
 
         <Button
             android:id="@+id/btnDeleteWorkout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🗑️ 운동 일지 삭제"
             android:layout_marginTop="12dp"
-            android:backgroundTint="#F44336"
-            android:textColor="#fff" />
+            android:backgroundTint="@color/myButtonColor"
+            android:text="🗑️ 운동 일지 삭제"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#000000" />
 
     </LinearLayout>
 </ScrollView>

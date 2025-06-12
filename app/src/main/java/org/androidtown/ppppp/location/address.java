@@ -338,6 +338,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -408,8 +409,21 @@ public class address extends AppCompatActivity {
             Intent intent = new Intent(address.this, SearchActivity.class);
             getSearchResult.launch(intent);
         });
-    }
 
+        // Toolbar 설정
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // 뒤로 가기 버튼 활성화
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // 현재 액티비티 종료 (뒤로 가기)
+        return true;
+    }
     private void getCoordinatesFromAddress(String address) {
         String apiKey = googleKey;
         String urlString = "https://maps.googleapis.com/maps/api/geocode/json?address="

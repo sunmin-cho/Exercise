@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="🔍 음식 검색 및 추가"
+        android:fontFamily="@font/pretendard_bold"
         android:textSize="22sp"
-        android:textStyle="bold"
         android:layout_gravity="center"
         android:paddingBottom="12dp"
         android:textColor="#333333"/>
@@ -30,19 +30,25 @@
             android:layout_width="127dp"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="🍞 아침" />
+            android:text="🍞 아침"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="20sp"/>
 
         <RadioButton
             android:id="@+id/radioLunch"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="🥗 점심" />
+            android:text="🥗 점심"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/radioDinner"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:text="🍛 저녁" />
+            android:text="🍛 저녁"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="20sp" />
     </RadioGroup>
 
     <!-- 검색창 -->
@@ -60,8 +66,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="검색"
-        android:backgroundTint="#6200EE"
-        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:backgroundTint="@color/mint"
+        android:textColor="@color/textGray"
         android:layout_marginTop="12dp"/>
 
     <!-- 검색 결과 리스트 -->

@@ -6,15 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".user.UserPage">
 
-    <!-- 뒤로 가기 버튼을 포함한 Toolbar -->
+    <!-- 흰색 Toolbar + 뒤로가기 버튼 -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:titleTextColor="@android:color/white"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:title="운동 검색"
+        app:title="🏋️ GymDiary"
+        android:titleTextColor="#000000"
         app:navigationIcon="@drawable/ic_back"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewProfile"
@@ -131,6 +136,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Edit"
+        android:backgroundTint="#a8e4ae"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

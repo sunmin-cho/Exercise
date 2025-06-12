@@ -9,6 +9,7 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,7 +47,6 @@ public class MainActivity2 extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         emptyTextView = findViewById(R.id.emptyTextView);
         tvWorkoutEntry = findViewById(R.id.tvWorkoutEntry);
-        Button btnChatbot = findViewById(R.id.btnChatbot);
 
         SharedPreferences prefs = getSharedPreferences("userPrefs", MODE_PRIVATE);
         uid = prefs.getString("uid", null); // 🔄 필드 변수에 할당
@@ -70,10 +70,6 @@ public class MainActivity2 extends AppCompatActivity {
             updateWorkoutEntryVisibility();
         });
 
-        btnChatbot.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity2.this, ChatbotActivity.class);
-            startActivity(intent);
-        });
 
         btnAddFood.setOnClickListener(v -> {
             if (selectedDate == null || selectedDate.isEmpty()) {
@@ -106,8 +102,22 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Toolbar 설정
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // 뒤로 가기 버튼 활성화
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // 현재 액티비티 종료 (뒤로 가기)
+        return true;
+    }
 
     private void updateFoodList() {
         if (selectedDate == null || selectedDate.isEmpty()) return;

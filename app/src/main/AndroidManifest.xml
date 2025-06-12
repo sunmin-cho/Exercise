@@ -28,9 +28,10 @@
         android:theme="@style/Theme.Ppppp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:theme="@style/Theme.Ppppp.Splash"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,6 +40,7 @@
 
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".Homepage"/>
         <activity android:name=".exercise.ExerciseList"/>
         <activity android:name=".exercise.ExerciseDetail"/>

@@ -64,12 +64,6 @@
             android:name="org.androidtown.ppppp.pt.PtTimeMain"
             android:exported="true"/>
         <activity
-            android:name="org.androidtown.ppppp.inbody.InbodyAdapter"
-            android:exported="false" />
-        <activity
-            android:name="org.androidtown.ppppp.inbody.InbodyRecord"
-            android:exported="false" />
-        <activity
             android:name="org.androidtown.ppppp.inbody.InbodyListActivity"
             android:exported="false" />
         <activity

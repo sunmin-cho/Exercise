@@ -170,27 +170,52 @@ public class AttendanceActivity extends AppCompatActivity {
 
 
     private void loadAttendanceHistory() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-        Date weekStart = calendar.getTime();
-
-        calendar.add(Calendar.DAY_OF_WEEK, 6);
-        Date weekEnd = calendar.getTime();
-
         db.collection("attendance")
                 .document(uid)
                 .collection("records")
-                .whereGreaterThanOrEqualTo("timestamp", weekStart)
-                .whereLessThanOrEqualTo("timestamp", weekEnd)
-                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     attendanceList.clear();
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        attendanceList.add(doc.getId());
-                    }
-                    adapter.notifyDataSetChanged();
 
-                });
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    Calendar cal = Calendar.getInstance();
+
+                    // 이번 주 시작 (일요일 00:00:00)
+                    cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+                    cal.set(Calendar.HOUR_OF_DAY, 0);
+                    cal.set(Calendar.MINUTE, 0);
+                    cal.set(Calendar.SECOND, 0);
+                    cal.set(Calendar.MILLISECOND, 0);
+                    Date weekStart = cal.getTime();
+
+                    // 이번 주 끝 (토요일 23:59:59)
+                    cal.add(Calendar.DAY_OF_WEEK, 6);
+                    cal.set(Calendar.HOUR_OF_DAY, 23);
+                    cal.set(Calendar.MINUTE, 59);
+                    cal.set(Calendar.SECOND, 59);
+                    cal.set(Calendar.MILLISECOND, 999);
+                    Date weekEnd = cal.getTime();
+
+                    Log.d("AttendanceDebug", "WeekStart: " + weekStart + ", WeekEnd: " + weekEnd);
+
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        try {
+                            Date docDate = sdf.parse(doc.getId());
+                            if (docDate != null && !docDate.before(weekStart) && !docDate.after(weekEnd)) {
+                                attendanceList.add(doc.getId());
+                                Log.d("AttendanceDebug", "Included record: " + doc.getId());
+                            } else {
+                                Log.d("AttendanceDebug", "Excluded record: " + doc.getId());
+                            }
+                        } catch (Exception e) {
+                            Log.e("AttendanceDebug", "Invalid date format in document ID: " + doc.getId(), e);
+                        }
+                    }
+
+                    adapter.notifyDataSetChanged();
+                    Log.d("AttendanceDebug", "Filtered " + attendanceList.size() + " records this week.");
+                })
+                .addOnFailureListener(e -> Log.e("AttendanceDebug", "Failed to load attendance history", e));
     }
+
 }
